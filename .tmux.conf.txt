@@ -1,0 +1,96 @@
+# Unbinding C-b to C-x
+unbind C-b
+set -g prefix C-x
+bind C-x send-prefix
+
+set -g @plugin 'tmux-plugins/tpm'
+
+
+# split panes using h and v
+bind v split-window -h -c "#{pane_current_path}"
+bind h split-window -v -c "#{pane_current_path}"
+unbind '"'
+unbind %
+
+# New window in same path
+bind c new-window -c "#{pane_current_path}"
+
+# reload config file
+bind r source-file ~/.tmux.conf
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# don't rename windows automatically
+set-option -g allow-rename off
+
+# DESIGN TWEAKS
+
+# don't do anything when a 'bell' rings
+set -g visual-activity off
+set -g visual-bell off
+set -g visual-silence off
+setw -g monitor-activity off
+set -g bell-action none
+
+# clock mode color (gold)
+setw -g clock-mode-colour '#c49700'
+
+### COPY/PASTE SETTINGS
+setw -g mode-keys vi  # vi-style keys in copy-mode
+
+# Use capital P (Shift+P) to paste
+unbind ]
+bind P paste-buffer
+
+# Enter copy mode
+bind [ copy-mode
+
+# Quick copy current line (prefix + y)
+bind y run "tmux copy-mode \; send -X select-line \; send -X copy-pipe-and-cancel 'xclip -selection clipboard -in'"
+
+# Inside copy mode:
+#   - y to copy selection to clipboard
+#   - Enter to copy selection to clipboard
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard -in"
+bind -T copy-mode-vi Enter send -X copy-pipe-and-cancel "xclip -selection clipboard -in"
+
+# Toggle mouse mode with prefix + m
+bind * \
+    set -g mouse \;\
+    display-message "Mouse mode: #{?mouse,on,off}"
+
+# panes border colors
+set -g pane-border-style 'fg=#707070'               # muted gray
+set -g pane-active-border-style 'fg=#fdb827'        # gold
+
+# status bar
+set -g status-position top
+set -g status-justify left
+set -g status-style 'fg=#fdb827 bg=#000000'         # gold on black
+
+set -g status-left ''
+set -g status-left-length 10
+
+set -g status-right-style 'fg=#fdb827 bg=#000000'   # gold on black
+set -g status-right '%Y-%m-%d %H:%M '
+set -g status-right-length 50
+
+setw -g window-status-current-style 'fg=#fdb827 bg=#000000'  # gold on black
+setw -g window-status-current-format ' #I #W #F '
+
+setw -g window-status-style 'fg=#fdb827 bg=#1a1a1a'        # gold on dark gray
+setw -g window-status-format ' #I #[fg=#fdb827]#W #[fg=#fdb827]#F '
+
+setw -g window-status-bell-style 'fg=#fdb827 bg=#000000'    # gold on black
+
+# messages
+set -g message-style 'fg=#fdb827 bg=#000000'               # gold on black
+
+
+
+# Keep at the Bottom of config file 
+run '~/.tmux/plugins/tpm/tpm'
