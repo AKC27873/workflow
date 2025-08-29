@@ -98,19 +98,23 @@
 
   # Install firefox.
   programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
   # nix search wget
 
   environment.systemPackages = with pkgs; [
+   pkgs.bluez
+   pkgs.blueman
    pkgs.wget
    pkgs.tmux
    pkgs.toybox
    pkgs.inetutils
    pkgs.openvpn
-   pkgs.micro-full
+   pkgs.neovim
+   pkgs.gcc 
+   pkgs.binutils 
+   pkgs.glibc.dev
    pkgs.eza
    pkgs.xclip
    pkgs.libreoffice
@@ -125,7 +129,6 @@
    pkgs.docker
    pkgs.docker-compose
    pkgs.spotify
-   pkgs.libvirt
    pkgs.virt-manager
    pkgs.virtio-win
    pkgs.go
@@ -147,6 +150,8 @@
   services.tailscale.enable = true;
   virtualisation.docker.enable = true;
   programs.zsh.enable = true;
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true; 
   # Enable the OpenSSH daemon.
    services.openssh.enable = true;
 
