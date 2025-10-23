@@ -10,11 +10,7 @@ vim.cmd [[
 call plug#begin(stdpath('data') . '/plugged')
 
 " Themes
-Plug 'patstockwell/vim-monokai-tasty'
-Plug 'tanvirtin/monokai.nvim'
-Plug 'sjl/badwolf'
-Plug 'morhetz/gruvbox'
-
+Plug 'folke/tokyonight.nvim'
 " Essentials
 Plug 'tpope/vim-sensible'
 Plug 'itchyny/lightline.vim'
@@ -75,7 +71,7 @@ vim.cmd([[
 syntax enable
 filetype plugin indent on
 set background=dark
-colorscheme badwolf
+colorscheme tokyonight
 ]])
 
 -- ===========================
