@@ -112,6 +112,7 @@
    pkgs.inetutils
    pkgs.openvpn
    pkgs.neovim
+   pkgs.sublime4-dev
    pkgs.gcc 
    pkgs.binutils 
    pkgs.glibc.dev
